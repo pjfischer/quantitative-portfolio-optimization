@@ -16,9 +16,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "black==25.9.0",
-    "isort",
-    "flake8",
+    "ruff==0.15.9",
+    "pytest>=9.0",
     "pre-commit==4.3.0",
 ]
 cuda12 = [
@@ -30,13 +29,19 @@ cuda13 = [
     "cuopt-cu13==26.04.*",
 ]
 
-[tool.black]
+[tool.ruff]
 line-length = 88
-target-version = ['py311']
+target-version = "py311"
 
-[tool.isort]
-profile = "black"
-line_length = 88
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["E402"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
 
 [tool.setuptools]
 packages = ["cufolio"]
